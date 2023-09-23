@@ -18,11 +18,11 @@ public class math : MonoBehaviour
     text_score.text = "Score:"+ score.ToString();
     rand(0);
   }
-  void rand(int def){
+  void rand(int dif){
     string prim = "if you see this in game something went wrong";
     answ = UnityEngine.Random.Range(1,4);
 
-    if (def == 0){
+    if (dif == 0){
 
       do
         {numb[0]=UnityEngine.Random.Range(1,4);}
@@ -41,7 +41,7 @@ public class math : MonoBehaviour
   if(text_prim.text != prim)
     text_prim.text = prim;
   else
-    rand(def);
+    rand(dif);
 }
 
   private string SusToString(bool sus){
