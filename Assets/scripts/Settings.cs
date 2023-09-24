@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using Unity.VisualScripting;
 
 public class Settings : MonoBehaviour
 {
-    public static int ScoreToWin = 50;
+    public static int ScoreToWin;
     public GameObject input_obg;
     public Text ScoreLableText;
     public GameObject ErrorScore;
     public GameObject AllSettings;
+
+    private void Start() // настройка статики
+    {if (Storage._ScoreToWin != 0) ScoreToWin = Storage._ScoreToWin; else ScoreToWin = 50;}
+
     public void DropDownScore(int option){
         switch(option){
             case 0:
@@ -35,6 +41,7 @@ public class Settings : MonoBehaviour
     public void SetScoreToWin(string number){
         if (number.Length > 0 && Convert.ToInt32(number)>0){
             ScoreToWin = Convert.ToInt32(number);
+            Storage._ScoreToWin = Convert.ToInt32(number); // занёс в статику значение выйгрыша
             ErrorScore.SetActive(false);
             ScoreLableText.text = ScoreToWin.ToString();
         }else
@@ -43,6 +50,6 @@ public class Settings : MonoBehaviour
     public void SetSettingsActive(){
         AllSettings.SetActive(true);
         ScoreLableText.text = ScoreToWin.ToString();
-    }  
+    } 
      
 }
