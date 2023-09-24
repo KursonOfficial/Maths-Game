@@ -11,9 +11,9 @@ public class math : MonoBehaviour
   int score = 0;
   int answ;
   List<int> numb = new List<int>() { 0, 0, 0, 0 };
-  public bool multiplayer;
+  public bool multiplayer, player1;
   List<bool> sus = new List<bool>() { false, false, false }; 
-  public GameObject win;
+  public GameObject GameOver;
   void Start(){   
     text_score.text = "Score:"+ score.ToString();
     rand(0);
@@ -45,25 +45,31 @@ public class math : MonoBehaviour
 }
 
   private string SusToString(bool sus){
-  if (sus){
-    return "+";
-  }else{
-    return "-";
+    if (sus){
+      return "+";
+    }else{
+      return "-";
   }
- }
+  }
 
-    public void but0(int NumBut){
+    /* фунция button отвечает за то чтоб кнопки сверяли 
+     * ответет с их значение и в зависимосте от ответа 
+      прибавляли или убавляли очки (значенние кнопки выбирается в юнити)*/
+    public void button(int NumBut){
       if (answ == NumBut){
         score++;
         text_score.text = "Score:" + score.ToString();
         rand(0);
-        if (multiplayer==true && score == Settings.ScoreToWin){
-          
+        if (multiplayer==true && score >= Settings.ScoreToWin){
+        GameOver.SetActive(true);
+                if (player1 == false) {
+                    GameOver.transform.rotation = new Quaternion(0f, 0f, 180f, 0);
+                }
         }
       }else{
         score = 0;
         text_score.text = "Score:" + score.ToString();
         rand(0);
       }
-  }
+    }
 }
