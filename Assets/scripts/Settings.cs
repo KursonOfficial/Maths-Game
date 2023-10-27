@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using Unity.VisualScripting;
 
 public class Settings : MonoBehaviour
 {
@@ -13,6 +9,8 @@ public class Settings : MonoBehaviour
     public Text ScoreLableText;
     public GameObject ErrorScore;
     public GameObject AllSettings;
+    public AudioSource SettingsMusic;
+    public AudioSource InputSound;
 
     private void Start() // настройка статики
     {if (Storage._ScoreToWin != 0) ScoreToWin = Storage._ScoreToWin; else ScoreToWin = 50;}
@@ -38,17 +36,29 @@ public class Settings : MonoBehaviour
         }            
     }
     public void SetScoreToWin(string number){
-        if (number.Length > 0 && Convert.ToInt32(number)>0){
+        if (number.Length > 0 && Convert.ToInt32(number) > 0)
+        {
             ScoreToWin = Convert.ToInt32(number);
             Storage._ScoreToWin = Convert.ToInt32(number); // занёс в статику значение выйгрыша
             ErrorScore.SetActive(false);
             ScoreLableText.text = ScoreToWin.ToString();
-        }else
+            InputSound.pitch = 1;
+            InputSound.Play();
+        }
+        else
+        {
+            InputSound.pitch = 0.4f;
+            InputSound.Play();
             ErrorScore.SetActive(true);
+
+        }
     }
     public void SetSettingsActive(){
+        
         AllSettings.SetActive(true);
         ScoreLableText.text = ScoreToWin.ToString();
+        SettingsMusic.pitch = UnityEngine.Random.Range(0.5f,1.2f) ;
+
     } 
      
 }
