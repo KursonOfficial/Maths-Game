@@ -7,13 +7,18 @@ using UnityEngine.UI;
 
 public class math : MonoBehaviour
 {
-  public Text text_prim,text_score;
-  int score = 0;
-  int answ;
-  List<int> numb = new List<int>() { 0, 0, 0, 0 };
-  public bool multiplayer, player1;
-  List<bool> sus = new List<bool>() { false, false, false }; 
-  public GameObject GameOver;
+
+    public Text text_prim,text_score;
+    int score = 0;
+    int answ;
+
+    public bool multiplayer, player1;
+
+    List<int> numb = new List<int>() { 0, 0, 0, 0 };
+    List<bool> sus = new List<bool>() { false, false, false }; 
+
+    public GameObject GameOver;
+
   void Start(){   
     text_score.text = "Score:"+ score.ToString();
     rand(0);
