@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     public static int ScoreToWin;
-    public GameObject input_obg;
+    public GameObject InputObg;
     public Text ScoreLableText;
     public GameObject ErrorScore;
     public GameObject AllSettings;
@@ -16,23 +16,24 @@ public class Settings : MonoBehaviour
     {if (Storage._ScoreToWin != 0) ScoreToWin = Storage._ScoreToWin; else ScoreToWin = 50;}
 
     public void DropDownScore(int option){
-        switch(option){
+        switch(option)
+        {
             case 0:
-                input_obg.SetActive(false);
+                InputObg.SetActive(false);
                 ScoreToWin = 50;
                 ErrorScore.SetActive(false);
                 ScoreLableText.text = ScoreToWin.ToString();
-            break;
+                break;
             case 1:
-                input_obg.SetActive(false);
+                InputObg.SetActive(false);
                 ScoreToWin = 100;
                 ErrorScore.SetActive(false);
                 ScoreLableText.text = ScoreToWin.ToString();
-            break;
+                break;
             case 2:
-                input_obg.SetActive(true);
+                InputObg.SetActive(true);
                 ScoreLableText.text = "своё";
-            break;
+                break;
         }            
     }
     public void SetScoreToWin(string number){
@@ -53,12 +54,21 @@ public class Settings : MonoBehaviour
 
         }
     }
+    public void SetSpeedCountdown(float number)
+    {
+        MathManager.SpeedCountdown = number;
+    }
+    public void SetAddingToCombo(float number)
+    {
+        MathManager.AddingToCombo = Convert.ToInt32(number);
+    }
     public void SetSettingsActive(){
         
         AllSettings.SetActive(true);
         ScoreLableText.text = ScoreToWin.ToString();
         SettingsMusic.pitch = UnityEngine.Random.Range(0.5f,1.2f) ;
-
+        
     } 
+
      
 }
