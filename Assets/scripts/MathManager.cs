@@ -142,7 +142,7 @@ public class MathManager : MonoBehaviour
     {
         if (answer == NumBut)
         {
-            score++;
+            score += combo+1;
             TextScore.text = "Score:" + score.ToString();
             CheckCombo(1);
             rand(combo);            
@@ -185,7 +185,7 @@ public class MathManager : MonoBehaviour
                     Visual.SetFire(true, 1);
                     break;
                 }
-                Visual.TextCombo.text = "COMBO x1";
+                Visual.TextCombo.text = $"COMBO x{combo + 1}";
                 break;
 
             case -1:               
@@ -209,7 +209,7 @@ public class MathManager : MonoBehaviour
                 break;
         }
     }
-
+    //корутина котороя убавляет полоску комбо ._.
     public IEnumerator ComboCountdown()
     {
         while (true)
@@ -230,6 +230,7 @@ public class MathManager : MonoBehaviour
             yield return null;
         }      
     }
+    //корутина котороя постепенно повышает полоску комбо
     IEnumerator SmoothAdd(float toAdd)
     {
         StopCoroutine(CorCountdown);
@@ -241,12 +242,12 @@ public class MathManager : MonoBehaviour
         }
         StartCoroutine(CorCountdown);
     }
-
+    //корутина заканчивает полоску комбо
     IEnumerator SmoothOver()
     {
-        for (int i = 4; i > 0 ; i--)
+        for (int i = 10; i > 0 ; i--)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.001f);
             ComboСounting -= ComboСounting/i;            
         }
         ComboСounting = 0 ;
